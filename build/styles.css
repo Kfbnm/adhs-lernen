@@ -1,0 +1,99 @@
+/* Base styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #1f2937; /* Grau-schwarz (Tailwind’s text-gray-800) */
+}
+
+/* Links standardisieren */
+a {
+    color: #2563eb; /* blue-600 */
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* Buttons Standardisierung */
+button {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Container Max-Width */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Responsive Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Überschriften */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.875rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+/* Absätze */
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+/* Lists */
+ul, ol {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* Formular-Standards */
+input,
+textarea {
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db; /* gray-300 */
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    outline: none;
+}
+
+    input:focus,
+    textarea:focus {
+        border-color: #2563eb; /* blue-600 */
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+
+/* Footer */
+footer a {
+    color: #2563eb;
+}
+
