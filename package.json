@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "nodemailer": "^6.9.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -14,5 +15,10 @@
   },
   "devDependencies": {
     "react-scripts": "5.0.1"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 0.2%",
+    "not dead"
+  ]
 }
