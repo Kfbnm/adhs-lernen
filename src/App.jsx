@@ -401,10 +401,11 @@ const App = () => {
 
                 {activeTab === "contact" && (
                     <section className="max-w-2xl mx-auto">
-                        <h2 className="text-2xl font-bold mb-6">Kontakt</h2>
+                        <h2>Kontakt</h2>
                         <form
                             onSubmit={async (e) => {
                                 e.preventDefault();
+
                                 const formData = new FormData(e.target);
                                 const data = {
                                     name: formData.get("name"),
@@ -412,6 +413,7 @@ const App = () => {
                                     message: formData.get("message")
                                 };
 
+                                // Schicke die Daten an deine Netlify Function
                                 const response = await fetch("/.netlify/functions/send-contact", {
                                     method: "POST",
                                     headers: {
@@ -423,10 +425,10 @@ const App = () => {
                                 const result = await response.json();
 
                                 if (result.success) {
-                                    alert("Vielen Dank für deine Nachricht! Wir melden uns bald bei dir.");
-                                    e.target.reset(); // Leere das Formular
+                                    alert("Vielen Dank für deine Nachricht!");
+                                    e.target.reset();
                                 } else {
-                                    alert("Leider ist ein Fehler aufgetreten. Versuche es später erneut.");
+                                    alert("Leider ist ein Fehler aufgetreten.");
                                 }
                             }}
                             className="space-y-4"
@@ -466,6 +468,7 @@ const App = () => {
                             </button>
                         </form>
                     </section>
+                )}
                 )}
 
                 {activeTab === "login" && (

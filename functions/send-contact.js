@@ -4,16 +4,16 @@ exports.handler = async (event) => {
     try {
         const { name, email, message } = JSON.parse(event.body);
 
-        // Erstelle einen Nodemailer-Transporter
         const transporter = nodemailer.createTransport({
-            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
             auth: {
                 user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
-            },
+                pass: process.env.EMAIL_PASS
+            }
         });
 
-        // E-Mail-Inhalt
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: process.env.EMAIL_USER,
@@ -23,21 +23,20 @@ exports.handler = async (event) => {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>E-Mail:</strong> ${email}</p>
         <p><strong>Nachricht:</strong> ${message}</p>
-      `,
+      `
         };
 
-        // E-Mail senden
         await transporter.sendMail(mailOptions);
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ success: true, message: "E-Mail gesendet!" }),
+            body: JSON.stringify({ success: true })
         };
     } catch (error) {
         console.error(error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ success: false, message: "Fehler beim Senden der Nachricht." }),
+            body: JSON.stringify({ success: false })
         };
     }
 };
