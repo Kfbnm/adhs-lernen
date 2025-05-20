@@ -402,11 +402,40 @@ const App = () => {
                 {activeTab === "contact" && (
                     <section className="max-w-2xl mx-auto">
                         <h2 className="text-2xl font-bold mb-6">Kontakt</h2>
-                        <form className="space-y-4">
+                        <form
+                            onSubmit={async (e) => {
+                                e.preventDefault();
+                                const formData = new FormData(e.target);
+                                const data = {
+                                    name: formData.get("name"),
+                                    email: formData.get("email"),
+                                    message: formData.get("message")
+                                };
+
+                                const response = await fetch("/.netlify/functions/send-contact", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify(data)
+                                });
+
+                                const result = await response.json();
+
+                                if (result.success) {
+                                    alert("Vielen Dank für deine Nachricht! Wir melden uns bald bei dir.");
+                                    e.target.reset(); // Leere das Formular
+                                } else {
+                                    alert("Leider ist ein Fehler aufgetreten. Versuche es später erneut.");
+                                }
+                            }}
+                            className="space-y-4"
+                        >
                             <div>
                                 <label className="block text-sm font-medium mb-1">Name</label>
                                 <input
                                     type="text"
+                                    name="name"
                                     className="w-full px-4 py-2 border rounded"
                                     required
                                 />
@@ -415,15 +444,15 @@ const App = () => {
                                 <label className="block text-sm font-medium mb-1">E-Mail</label>
                                 <input
                                     type="email"
+                                    name="email"
                                     className="w-full px-4 py-2 border rounded"
                                     required
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">
-                                    Nachricht
-                                </label>
+                                <label className="block text-sm font-medium mb-1">Nachricht</label>
                                 <textarea
+                                    name="message"
                                     rows="4"
                                     className="w-full px-4 py-2 border rounded"
                                     required
@@ -433,7 +462,7 @@ const App = () => {
                                 type="submit"
                                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
                             >
-                                Senden
+                                Nachricht senden
                             </button>
                         </form>
                     </section>
